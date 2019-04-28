@@ -1,0 +1,6 @@
+__pycache__/
+/
+.idea/
+question/myQuestion.txt
+static/css/test.css
+instance/german.db-journal

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.muicss.com/mui-latest/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/style.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="//cdn.muicss.com/mui-latest/js/mui.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="static/css/script.js"></script>
+  </head>
+<body>
+	<div id="sidedrawer" class="mui--no-user-select">
+      <div id="sidedrawer-brand" class="mui--appbar-line-height">
+        <span class="mui--text-title">A 1</span>
+      </div>
+      <div class="mui-divider"></div>
+      <ul>
+        <li>
+          <strong>Uhrzeit</strong>
+          <ul>
+            <li><a href="/">Self Study</a></li>
+            <li><a href="practice">Ergänzen</a></li>
+            <li><a href="duration">Dauer</a></li>
+            <li><a href="date">Tage</a></li>
+          </ul>
+        </li>
+        <li>
+          <strong>Modalverben</strong>
+          <ul>
+            <li><a href="modalverbs">Ergänzen</a></li>
+          </ul>
+        </li>
+        <li>
+          <strong>Perfekt</strong>
+          <ul>
+            <li><a href="perfect">Ergänzen</a></li>
+          </ul>
+        </li>
+        <li>
+          <strong>Personalpronoun</strong>
+          <ul>
+            <li><a href="pronoun">Ergänzen</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <header id="header">
+      <div class="mui-appbar mui--appbar-line-height">
+        <div class="mui-container-fluid">
+          <a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
+          <a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
+          <span class="mui--text-title mui--visible-xs-inline-block mui--visible-sm-inline-block">A 1</span>
+        </div>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="mui--appbar-height"></div>
+      <div class="mui-container-fluid">
+        <br>
+        <h1>Personalpronoun</h1>
+
+       {% if pronoun %}
+       <table class="table">
+        <tr>
+            {% for key in pronoun %}
+                <th scope="col">{{ key }}</th>
+            {% endfor %}
+        </tr>
+            {% for row in protable %}
+           <tr>
+                {% for item in row %}
+                    <td> {{ item }} </td>
+                {% endfor %}
+           </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+       </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+</body>
+</html>
