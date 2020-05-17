@@ -1,5 +1,5 @@
-import TimeGerman as tg
-import TimeConversion as tc
+import time_german as tg
+import time_conversion as tc
 
 uhr_str = "Uhr"
 

@@ -1,4 +1,4 @@
-import TimeGerman as tg
+import time_german as tg
 import db as db
 from datetime import datetime
 import random

@@ -1,11 +1,11 @@
 from __future__ import division
-import TimeConversion as tc
-import officialTime as ot
-import durationData as dd
-import modalverben as mv
+import time_conversion as tc
+import official_time as ot
+import duration_data as dd
+import modal_verben as mv
 import verben as vb
 import duration as du
-import personalpronoun as pp
+import personal_pronoun as pp
 from datetime import time
 import random
 import re

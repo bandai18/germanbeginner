@@ -1,4 +1,4 @@
-import durationData as dd
+import duration_data as dd
 
 
 def get_duration_from_dict(subject):

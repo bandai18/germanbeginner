@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, logging, Response, redirect, flash
 import main
-import datefunction as dt
+import date_function as dt
 
 
 app = Flask(__name__)

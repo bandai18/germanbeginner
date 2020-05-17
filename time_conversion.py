@@ -1,4 +1,4 @@
-import TimeGerman as tg
+import time_german as tg
 import math
 
 
