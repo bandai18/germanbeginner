@@ -1,5 +1,3 @@
-# README #
-
 This is a project for learning A1 German. It is a web application using python and flask.
 
 1. Install pyenv (following instructions for pyenv)
