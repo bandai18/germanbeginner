@@ -70,14 +70,14 @@ def modalverb():
     if request.method == "POST" and request.form['clear'] == "none":
         key = request.form['questionkey']
         modalverb = request.form['modalverb']
-        enteredanswer = request.form['answer']
-        questionbody = request.form['questionbody']
-        checkanswer = main.evaluate_answer(enteredanswer, modalverb)
+        entered_answer = request.form['answer']
+        question_body = request.form['questionbody']
+        check_answer = main.evaluate_answer(entered_answer, modalverb)
 
         return render_template('modalverbs.html', display_value=display_value, pronoun=pronoun,
-                               questionkey=key, questionbody=questionbody, answer=enteredanswer, result=checkanswer)
+                               questionkey=key, questionbody=question_body, answer=entered_answer, result=check_answer)
     else:
-        display_question = main.get_modalquestions()
+        display_question = main.get_modal_questions()
 
         return render_template('modalverbs.html', display_value=display_value, pronoun=pronoun,
                                modal_question=display_question)
@@ -89,8 +89,8 @@ def order():
 
 
 @app.route('/perfect', methods=["GET"])
-def perfectget():
-    verbs = main.get_allverbs()
+def perfect_get():
+    verbs = main.get_all_verbs()
 
     return render_template('perfect.html', verbs=verbs)
 
@@ -99,14 +99,14 @@ def perfectget():
 def perfect():
 
     if request.form['verbtype'] == "none":
-        pastanswer = request.form['pastanswer']
-        perfectanswer = request.form['perfectanswer']
+        past_answer = request.form['pastanswer']
+        perfect_answer = request.form['perfectanswer']
 
-        pastkey = request.form['pastkey']
-        perfectverb = request.form['perfectverb']
-        returnverb = request.form['verb']
-        result = main.evaluate_perfect(pastanswer, pastkey, perfectanswer, perfectverb)
-        question = main.get_verb_same_question(returnverb)
+        past_key = request.form['pastkey']
+        perfect_verb = request.form['perfectverb']
+        return_verb = request.form['verb']
+        result = main.evaluate_perfect(past_answer, past_key, perfect_answer, perfect_verb)
+        question = main.get_verb_same_question(return_verb)
         return render_template('perfect.html', question=question, result=result)
     else:
         items = [1, 1, 1]
@@ -143,10 +143,10 @@ def perfect():
 @app.route('/date', methods=["GET"])
 def dates():
     dates = dt.get_dates()
-    wholedate = dt.get_date()
-    month = wholedate.month
-    date = wholedate.day
-    year = wholedate.year
+    whole_date = dt.get_date()
+    month = whole_date.month
+    date = whole_date.day
+    year = whole_date.year
 
     return render_template('date.html', dates=dates, month=month, year=year, date=date)
 
@@ -168,9 +168,9 @@ def dates_post():
 @app.route('/pronoun', methods=["GET"])
 def pronoun():
     pronouns = main.get_pronoun_nominative()
-    protable = main.get_pronoun_table()
+    pro_table = main.get_pronoun_table()
 
-    return render_template('pronoun.html', pronoun=pronouns, protable=protable)
+    return render_template('pronoun.html', pronoun=pronouns, protable=pro_table)
 
 
 if __name__ == '__main__':

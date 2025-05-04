@@ -3,147 +3,147 @@ import math
 
 
 def get_half_time(hour, minute):
-	timePhrase = []
+	time_phrase = []
 
-	timePhrase.append(tg.getUnofficialPhrase(30))
-	timePhrase.append(tg.get12Hour(hour+1))
+	time_phrase.append(tg.get_unofficial_phrase(30))
+	time_phrase.append(tg.get_12_hour(hour+1))
 
-	return get_string_name(timePhrase)
+	return get_string_name(time_phrase)
 
 
 def get_quater_time(hour, minute):
-	timePhrase = []
-	hourIndex = 0
+	time_phrase = []
+	hour_index = 0
 
-	timePhrase.append(tg.getUnofficialPhrase(15))
+	time_phrase.append(tg.get_unofficial_phrase(15))
 	if minute == 15:
-		timePhrase.append(tg.getPreposition('after'))
+		time_phrase.append(tg.get_preposition('after'))
 	else:
-		timePhrase.append(tg.getPreposition('before'))
-		hourIndex = 1
+		time_phrase.append(tg.get_preposition('before'))
+		hour_index = 1
 
-	timePhrase.append(tg.get12Hour(hour + hourIndex))
+	time_phrase.append(tg.get_12_hour(hour + hour_index))
 
-	return get_string_name(timePhrase)
+	return get_string_name(time_phrase)
 
 
 def get_twenty_minutes(hour, minute):
-	fullTimePhrase = []
+	full_time_phrase = []
 	
-	fullTimePhrase.append(get_to_half_time(hour, minute))
-	fullTimePhrase.append(get_twenty(hour, minute))
+	full_time_phrase.append(get_to_half_time(hour, minute))
+	full_time_phrase.append(get_twenty(hour, minute))
 	
-	return fullTimePhrase
+	return full_time_phrase
 
 	
 def get_twenty(hour, minute):
-	timePhrase = []
-	hourIndex = 0
+	time_phrase = []
+	hour_index = 0
 	
-	timePhrase.append(tg.getUnofficialPhrase(20))
+	time_phrase.append(tg.get_unofficial_phrase(20))
 	if minute == 20:
-		timePhrase.append(tg.getPreposition('after'))
+		time_phrase.append(tg.get_preposition('after'))
 	else:
-		timePhrase.append(tg.getPreposition('before'))
-		hourIndex = 1
+		time_phrase.append(tg.get_preposition('before'))
+		hour_index = 1
 	
-	timePhrase.append(tg.get12Hour(hour+hourIndex))
+	time_phrase.append(tg.get_12_hour(hour+hour_index))
 	
-	return get_string_name(timePhrase)
+	return get_string_name(time_phrase)
 	
 	
 def get_to_half_time(hour, minute):
-	halfTimePhrase = []	
+	half_time_phrase = []	
 	difference = minute - 30
 
-	halfTimePhrase.append(tg.getUnofficialPhrase(math.fabs(difference)))
+	half_time_phrase.append(tg.get_unofficial_phrase(math.fabs(difference)))
 	if difference < 0:
-		halfTimePhrase.append(tg.getPreposition('before'))
+		half_time_phrase.append(tg.get_preposition('before'))
 	else:
-		halfTimePhrase.append(tg.getPreposition('after'))
+		half_time_phrase.append(tg.get_preposition('after'))
 		
-	halfTimePhrase.append(tg.getUnofficialPhrase(30))
-	halfTimePhrase.append(tg.get12Hour(hour+1))
+	half_time_phrase.append(tg.get_unofficial_phrase(30))
+	half_time_phrase.append(tg.get_12_hour(hour+1))
 	
-	return get_string_name(halfTimePhrase)
+	return get_string_name(half_time_phrase)
 
 
 def get_five_minutes(hour, minute):
-	timePhrase = []	
-	hourIndex = 1
+	time_phrase = []	
+	hour_index = 1
 	
-	timePhrase.append(tg.getUnofficialPhrase(5))
+	time_phrase.append(tg.get_unofficial_phrase(5))
 	if minute < 6:
-		timePhrase.append(tg.getPreposition('after'))
-		hourIndex = 0
+		time_phrase.append(tg.get_preposition('after'))
+		hour_index = 0
 	elif minute < 26:
-		timePhrase.append(tg.getPreposition('before'))
-		timePhrase.append(tg.getUnofficialPhrase(30))
+		time_phrase.append(tg.get_preposition('before'))
+		time_phrase.append(tg.get_unofficial_phrase(30))
 	elif minute < 36:
-		timePhrase.append(tg.getPreposition('after'))
-		timePhrase.append(tg.getUnofficialPhrase(30))
+		time_phrase.append(tg.get_preposition('after'))
+		time_phrase.append(tg.get_unofficial_phrase(30))
 	else:
-		timePhrase.append(tg.getPreposition('before'))
+		time_phrase.append(tg.get_preposition('before'))
 
-	timePhrase.append(tg.get12Hour(hour+hourIndex))
+	time_phrase.append(tg.get_12_hour(hour+hour_index))
 	
-	return get_string_name(timePhrase)
+	return get_string_name(time_phrase)
 
 	
 def get_ten_minutes(hour, minute):
-	timePhrase = []	
-	hourIndex = 0
+	time_phrase = []	
+	hour_index = 0
 	
-	timePhrase.append(tg.getUnofficialPhrase(10))
+	time_phrase.append(tg.get_unofficial_phrase(10))
 	if minute < 11:
-		timePhrase.append(tg.getPreposition('after'))
+		time_phrase.append(tg.get_preposition('after'))
 	else:
-		timePhrase.append(tg.getPreposition('before'))
-		hourIndex = 1
+		time_phrase.append(tg.get_preposition('before'))
+		hour_index = 1
 		
-	timePhrase.append(tg.get12Hour(hour+hourIndex))
+	time_phrase.append(tg.get_12_hour(hour+hour_index))
 
-	return get_string_name(timePhrase)
+	return get_string_name(time_phrase)
 
 
 def get_exact_time_phrase(hour, minute):
-	fullTimePhrase = []
+	full_time_phrase = []
 
-	fullTimePhrase.append(tg.getUnofficialPhrase(minute))
-	fullTimePhrase.append(tg.get12Hour(hour))
+	full_time_phrase.append(tg.get_unofficial_phrase(minute))
+	full_time_phrase.append(tg.get_12_hour(hour))
 
-	return get_string_name(fullTimePhrase)
+	return get_string_name(full_time_phrase)
 
 
 def get_phrase(hour, min):
-	fullTimePhrase = []
+	full_time_phrase = []
 
 	if min % 30 == 0:
-		fullTimePhrase.append(get_half_time(hour, min))
+		full_time_phrase.append(get_half_time(hour, min))
 	elif min % 15 == 0:
-		fullTimePhrase.append(get_quater_time(hour, min))
+		full_time_phrase.append(get_quater_time(hour, min))
 	elif min % 20 == 0:
-		fullTimePhrase = get_twenty_minutes(hour, min)
+		full_time_phrase = get_twenty_minutes(hour, min)
 	elif min % 10 == 0:
-		fullTimePhrase.append(get_ten_minutes(hour, min))
+		full_time_phrase.append(get_ten_minutes(hour, min))
 	else:
-		fullTimePhrase.append(get_five_minutes(hour, min))
+		full_time_phrase.append(get_five_minutes(hour, min))
 
-	return fullTimePhrase
+	return full_time_phrase
 
 
 def get_german_time_phrase(hour, minute):
-	timePhrase = []
+	time_phrase = []
 
 	if (minute != 0 and minute % 5 == 0):
-		timePhrase = get_phrase(hour, minute)
+		time_phrase = get_phrase(hour, minute)
 	elif minute == 0:
-		timePhrase.append(get_exact_time_phrase(hour, minute))
+		time_phrase.append(get_exact_time_phrase(hour, minute))
 
-	return timePhrase
+	return time_phrase
 
 
-def get_string_name(list):
-	my_str = ' '.join(map(str, list))
+def get_string_name(items_list):
+	my_str = ' '.join(map(str, items_list))
 
 	return my_str

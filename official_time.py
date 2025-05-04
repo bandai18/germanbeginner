@@ -5,14 +5,14 @@ uhr_str = "Uhr"
 
 
 def get_digital_time_phrase(hour, minute):
-    fullTimePhrase = []
+    full_time_phrase = []
 
-    fullTimePhrase.append(tg.get_number(hour))
-    fullTimePhrase.append(uhr_str)
+    full_time_phrase.append(tg.get_number(hour))
+    full_time_phrase.append(uhr_str)
 
     # -- When Time is like 12:00
     if minute != 0:
-        fullTimePhrase.append(tg.get_number(minute))
+        full_time_phrase.append(tg.get_number(minute))
 
-    return tc.get_string_name(fullTimePhrase)
+    return tc.get_string_name(full_time_phrase)
 

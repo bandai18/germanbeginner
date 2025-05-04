@@ -15,11 +15,11 @@ import db as db
 def get_time(time):
     if check_input_value(time) is not None:
         input_time = time.split(':')
-        hh = int(input_time[0])
-        mm = int(input_time[1])
+        hours = int(input_time[0])
+        minutes = int(input_time[1])
 
-        final_list = [ot.get_digital_time_phrase(hh, mm)]
-        final_list.extend(tc.get_german_time_phrase(hh%12, mm))
+        final_list = [ot.get_digital_time_phrase(hours, minutes)]
+        final_list.extend(tc.get_german_time_phrase(hours%12, minutes))
 
         return final_list
     else:
@@ -28,11 +28,11 @@ def get_time(time):
 
 def get_rotate(time):
     input_time = time.split(':')
-    hh = int(input_time[0])
-    mm = int(input_time[1])
-    addhh = float(0.5) * mm
+    hours = int(input_time[0])
+    minutes = int(input_time[1])
+    add_hours = float(0.5) * minutes
 
-    rotate_list = [(hh % 12) / 12 * 360 + addhh, mm / 60 * 360]
+    rotate_list = [(hours % 12) / 12 * 360 + add_hours, minutes / 60 * 360]
 
     return rotate_list
 
@@ -71,7 +71,7 @@ def get_pronoun():
     return mv.pronoun_tuple
 
 
-def get_modalquestions():
+def get_modal_questions():
     num = len(mv.modal_questions)
     index = random.randint(0, num-1)
 
@@ -114,7 +114,7 @@ def get_verbs(items):
     return res
 
 
-def get_allverbs():
+def get_all_verbs():
     cur = db.get_db().cursor()
     res = cur.execute(
         'select verb, regular, separable, prefixt, pf.perfect from verbs vb ' +

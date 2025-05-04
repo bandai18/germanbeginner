@@ -64,7 +64,7 @@ def get_number(minute):
 	return hour_dictionary.get(minute)
 
 
-def getUnofficialPhrase(minute):
+def get_unofficial_phrase(minute):
 	phrase_dictionary =	{	
 		5: "fünf",
 		10: "zehn",
@@ -77,7 +77,7 @@ def getUnofficialPhrase(minute):
 	return phrase_dictionary.get(minute)
 
 
-def getPreposition(prep):
+def get_preposition(prep):
 	phrase_dictionary =	{
 		"after": "nach",
 		"before": "vor"
@@ -85,7 +85,7 @@ def getPreposition(prep):
 	return phrase_dictionary.get(prep)
 
 
-def get12Hour(hour):
+def get_12_hour(hour):
 	hour_dictionary =	{
 		1: "eins",
 		2: "zwei",
