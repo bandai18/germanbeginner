@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Security Error</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Security Error</h1>
-        <p>A security error occurred. This could be due to:</p>
-        <ul>
-            <li>Your session may have expired</li>
-            <li>The form was submitted from an unauthorized source</li>
-        </ul>
-        <p>Details: {{ reason }}</p>
-        <p><a href="{{ url_for('index') }}">Return to home page</a></p>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Security Error{% endblock %}
+
+{% block sidebar_title %}German Beginner{% endblock %}
+{% block header_title %}German Beginner{% endblock %}
+
+{% block page_heading %}Security Error{% endblock %}
+
+{% block content %}
+<p>A security error occurred. This could be due to:</p>
+<ul>
+    <li>Your session may have expired</li>
+    <li>The form was submitted from an unauthorized source</li>
+</ul>
+<p>Details: {{ reason }}</p>
+<p><a href="{{ url_for('index') }}">Return to home page</a></p>
+{% endblock %}

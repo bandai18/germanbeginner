@@ -1,152 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//cdn.muicss.com/mui-latest/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <link href="static/css/style.css" rel="stylesheet" type="text/css" />
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% extends "base.html" %}
 
-    <script src="//cdn.muicss.com/mui-latest/js/mui.min.js"></script>
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="static/css/script.js"></script>
-  </head>
-<body>
-    <div id="sidedrawer" class="mui--no-user-select">
-      <div id="sidedrawer-brand" class="mui--appbar-line-height">
-        <span class="mui--text-title">A 1</span>
-      </div>
-      <div class="mui-divider"></div>
-      <ul>
-        <li>
-          <strong>Uhrzeit</strong>
-          <ul>
-            <li><a href="/">Self Study</a></li>
-            <li><a href="practice">Ergänzen</a></li>
-            <li><a href="duration">Dauer</a></li>
-            <li><a href="date">Tage</a></li>
-          </ul>
-        </li>
-        <li>
-          <strong>Modalverben</strong>
-          <ul>
-            <li><a href="modalverbs">Ergänzen</a></li>
-          </ul>
-        </li>
-        <li>
-          <strong>Perfekt</strong>
-          <ul>
-            <li><a href="perfect">Ergänzen</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+{% block title %}Uhrzeit Practice{% endblock %}
 
-    <header id="header">
-      <div class="mui-appbar mui--appbar-line-height">
-        <div class="mui-container-fluid">
-          <a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
-          <a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
-          <span class="mui--text-title mui--visible-xs-inline-block mui--visible-sm-inline-block">A 1</span>
+{% block sidebar_title %}A 1{% endblock %}
+{% block header_title %}A 1{% endblock %}
+
+{% block page_heading %}Uhrzeit Practice{% endblock %}
+
+{% block content %}
+<h5>Wie spät ist es?</h5>
+<h4>{{display_value}}</h4>
+
+<!-- display analog clock -->
+{% if rotates %}
+<div class="container">
+<svg id="clock-svg" width="40%" viewBox="0 0 2000 1000">
+<defs>
+<g id="minuteHand">
+  <line id="minuteHandLine" x1="0" y1="-280" x2="0" y2="0" stroke="#2E818D" stroke-width="15" transform="rotate({{ rotates[1] }})"/>
+</g>
+
+<g id="hourHand">
+  <line id="hourHandLine" x1="0" y1="-230" x2="0" y2="0" stroke="#2E818D" stroke-width="20" transform="rotate({{ rotates[0]}})"/>
+</g>
+
+<g id="hourScale">
+	<circle id="hourScaleLine" cx="3" cy="-357" r="15" stroke="none" fill="#888"/>
+	<circle id="hourScaleLine" cx="0" cy="-360" r="15" stroke="none" fill="#fff"/>
+</g>
+
+<g id="clock">
+	<circle cx="4" cy="4" r="400" fill="none" stroke="#888" stroke-width="20" />
+	<circle cx="0" cy="0" r="400" fill="none" stroke="#8bcfda" stroke-width="20" />
+
+	<use xlink:href="#hourScale" transform="rotate(0)" />
+	<use xlink:href="#hourScale" transform="rotate(30)" />
+	<use xlink:href="#hourScale" transform="rotate(60)" />
+	<use xlink:href="#hourScale" transform="rotate(90)" />
+	<use xlink:href="#hourScale" transform="rotate(120)" />
+	<use xlink:href="#hourScale" transform="rotate(150)" />
+	<use xlink:href="#hourScale" transform="rotate(180)" />
+	<use xlink:href="#hourScale" transform="rotate(210)" />
+	<use xlink:href="#hourScale" transform="rotate(240)" />
+	<use xlink:href="#hourScale" transform="rotate(270)" />
+	<use xlink:href="#hourScale" transform="rotate(300)" />
+	<use xlink:href="#hourScale" transform="rotate(330)" />
+
+	<use xlink:href="#minuteHand" transform="translate(0, 0)" />
+	<use xlink:href="#hourHand"   transform="translate(0, 0)" />
+	<circle cx="0" cy="0" r="13" fill="" stroke="#fff" stroke-width="20" />
+</g>
+</defs>
+
+<use xlink:href="#clock" transform="translate(500, 550)" />
+</svg>
+{% endif %}
+</div>
+
+<!-- answer -->
+<div class="container">
+    {% if display_value %}
+    <div style="display: flex;">
+    <form class="form-inline" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="form-group">
+            <input type="hidden" name="entered_value" value="{{display_value}}">
+            <button type="submit"  class="btn btn-primary btn-raised">Answer</button>
         </div>
-      </div>
-    </header>
+    </form>
+    <form class="form-inline" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <button type="submit" class="btn btn-default">Clear</button>
+        <input type="hidden" name="entered_value" value="clear">
+    </form>
+    </div>
+    {% endif %}
 
-    <div id="content-wrapper">
-      <div class="mui--appbar-height"></div>
-      <div class="mui-container-fluid">
-        <br>
-        <h1>Uhrzeit Practice</h1>
-　　　	<h5>Wie spät ist es?</h5>
-        <h4>{{display_value}}</h4>
-
-        <!-- display analog clock -->
-        {% if rotates %}
-        <div class="container">
-        <svg id="clock-svg" width="40%" viewBox="0 0 2000 1000">
-        <defs>
-        <g id="minuteHand">
-		  <line id="minuteHandLine" x1="0" y1="-280" x2="0" y2="0" stroke="#2E818D" stroke-width="15" transform="rotate({{ rotates[1] }})"/>
-
-		</g>
-
-		<g id="hourHand">
-		  <line id="hourHandLine" x1="0" y1="-230" x2="0" y2="0" stroke="#2E818D" stroke-width="20" transform="rotate({{ rotates[0]}})"/>
-
-		</g>
-
-		<g id="hourScale">
-			<circle id="hourScaleLine" cx="3" cy="-357" r="15" stroke="none" fill="#888"/>
-			<circle id="hourScaleLine" cx="0" cy="-360" r="15" stroke="none" fill="#fff"/>
-		</g>
-
-		<g id="clock">
-			<circle cx="4" cy="4" r="400" fill="none" stroke="#888" stroke-width="20" />
-			<circle cx="0" cy="0" r="400" fill="none" stroke="#8bcfda" stroke-width="20" />
-
-			<use xlink:href="#hourScale" transform="rotate(0)" />
-			<use xlink:href="#hourScale" transform="rotate(30)" />
-			<use xlink:href="#hourScale" transform="rotate(60)" />
-			<use xlink:href="#hourScale" transform="rotate(90)" />
-			<use xlink:href="#hourScale" transform="rotate(120)" />
-			<use xlink:href="#hourScale" transform="rotate(150)" />
-			<use xlink:href="#hourScale" transform="rotate(180)" />
-			<use xlink:href="#hourScale" transform="rotate(210)" />
-			<use xlink:href="#hourScale" transform="rotate(240)" />
-			<use xlink:href="#hourScale" transform="rotate(270)" />
-			<use xlink:href="#hourScale" transform="rotate(300)" />
-			<use xlink:href="#hourScale" transform="rotate(330)" />
-
-			<use xlink:href="#minuteHand" transform="translate(0, 0)" />
-			<use xlink:href="#hourHand"   transform="translate(0, 0)" />
-			<circle cx="0" cy="0" r="13" fill="" stroke="#fff" stroke-width="20" />
-		</g>
-        </defs>
-
-        <use xlink:href="#clock" transform="translate(500, 550)" />
-        </svg>
+    {% if time_value %}
+    {% for time in time_value %}
+    <div>
+        <ul>
+            <li> {{ time }} </li>
+        </ul>
+        {% endfor %}
         {% endif %}
-        </div>
-
-    <!-- answer -->
-    <div class="container">
-        {% if display_value %}
-        <div style="display: flex;">
-        <form class="form-inline" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <div class="form-group">
-                <input type="hidden" name="entered_value" value="{{display_value}}">
-                <button type="submit"  class="btn btn-primary btn-raised">Answer</button>
-            </div>
-        </form>
-        <form class="form-inline" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-default">Clear</button>
-            <input type="hidden" name="entered_value" value="clear">
-        </form>
-        </div>
-        {% endif %}
-
-        {% if time_value %}
-        {% for time in time_value %}
-        <div>
-            <ul>
-                <li> {{ time }} </li>
-            </ul>
-            {% endfor %}
-            {% endif %}
-        </div>
     </div>
-    </div>
-    </div>
-    <!-- Bootstrap CDN -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-
-</body>
-</html>
+</div>
+{% endblock %}

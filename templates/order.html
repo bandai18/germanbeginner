@@ -1,57 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Order Conversation</title>
+{% extends "base.html" %}
 
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <div class="container">
-    <!-- Navigation -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" href="/">Uhrzeit</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="duration">Dauer</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="order">Order</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="modalverb">Modalverben</a>
-      </li>
-    </ul>
+{% block title %}Order Conversation{% endblock %}
 
-        <div class="row">
+{% block sidebar_title %}German Beginner{% endblock %}
+{% block header_title %}German Beginner{% endblock %}
 
-            <div class="row msg_container base_sent">
-                <div class="col-md-10 col-xs-10">
-                    <div class="messages msg_sent">
-                        <p>that mongodb thing looks good, huh?
-                        tiny master db, and huge document store</p>
-                    </div>
-                </div>
+{% block page_heading %}Order Conversation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="row msg_container base_sent">
+        <div class="col-md-10 col-xs-10">
+            <div class="messages msg_sent">
+                <p>that mongodb thing looks good, huh?
+                tiny master db, and huge document store</p>
             </div>
-            <div class="row msg_container base_receive">
-                <div class="col-md-10 col-xs-10">
-                    <div class="messages msg_receive">
-                        <p>that mongodb thing looks good, huh?
-                        tiny master db, and huge document store</p>
-                    </div>
-                </div>
-            </div>
-		</div>
+        </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-</body>
-</html>
+    <div class="row msg_container base_receive">
+        <div class="col-md-10 col-xs-10">
+            <div class="messages msg_receive">
+                <p>that mongodb thing looks good, huh?
+                tiny master db, and huge document store</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

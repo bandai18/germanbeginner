@@ -1,177 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//cdn.muicss.com/mui-latest/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <link href="static/css/style.css" rel="stylesheet" type="text/css" />
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% extends "base.html" %}
 
-    <script src="//cdn.muicss.com/mui-latest/js/mui.min.js"></script>
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="static/css/script.js"></script>
-  </head>
-<body>
-	<div id="sidedrawer" class="mui--no-user-select">
-      <div id="sidedrawer-brand" class="mui--appbar-line-height">
-        <span class="mui--text-title">A 1</span>
-      </div>
-      <div class="mui-divider"></div>
-      <ul>
-        <li>
-          <strong>Uhrzeit</strong>
-          <ul>
-            <li><a href="/">Self Study</a></li>
-            <li><a href="practice">Ergänzen</a></li>
-            <li><a href="duration">Dauer</a></li>
-            <li><a href="date">Tage</a></li>
-          </ul>
-        </li>
-        <li>
-          <strong>Modalverben</strong>
-          <ul>
-            <li><a href="modalverbs">Ergänzen</a></li>
-          </ul>
-        </li>
-        <li>
-          <strong>Perfekt</strong>
-          <ul>
-            <li><a href="perfect">Ergänzen</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+{% block title %}Das Perfekt{% endblock %}
 
-    <header id="header">
-      <div class="mui-appbar mui--appbar-line-height">
-        <div class="mui-container-fluid">
-          <a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
-          <a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
-          <span class="mui--text-title mui--visible-xs-inline-block mui--visible-sm-inline-block">A 1</span>
-        </div>
-      </div>
-    </header>
+{% block sidebar_title %}A 1{% endblock %}
+{% block header_title %}A 1{% endblock %}
 
-    <div id="content-wrapper">
-      <div class="mui--appbar-height"></div>
-      <div class="mui-container-fluid">
-        <br>
-        <h1>Das Perfekt</h1>
+{% block page_heading %}Das Perfekt{% endblock %}
 
-        <!-- Regular -->
-        <form class="form-inline" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-primary" type="button">Regelmäßig ohne Präfix</button>
-            <input type="hidden" name="verbtype" value="regwopre">
-        </form>
+{% block content %}
+<!-- Regular -->
+<form class="form-inline" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button type="submit" class="btn btn-primary" type="button">Regelmäßig ohne Präfix</button>
+    <input type="hidden" name="verbtype" value="regwopre">
+</form>
 
-        <form class="form-inline" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-primary" type="button">Regelmäßig mit Präfix trennbare</button>
-            <input type="hidden" name="verbtype" value="regwzpretre">
-        </form>
+<form class="form-inline" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button type="submit" class="btn btn-primary" type="button">Regelmäßig mit Präfix trennbare</button>
+    <input type="hidden" name="verbtype" value="regwzpretre">
+</form>
 
-        <form class="form-inline" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-primary" type="button">Regelmäßig mit Präfix nicht trennbare</button>
-            <input type="hidden" name="verbtype" value="regwzpreni">
-        </form>
+<form class="form-inline" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button type="submit" class="btn btn-primary" type="button">Regelmäßig mit Präfix nicht trennbare</button>
+    <input type="hidden" name="verbtype" value="regwzpreni">
+</form>
 
-        <!-- Irregular -->
-        <form class="form-inline" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-primary" type="button">Unregelmäßig ohne Präfix</button>
-            <input type="hidden" name="verbtype" value="iregwopre">
-        </form>
+<!-- Irregular -->
+<form class="form-inline" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button type="submit" class="btn btn-primary" type="button">Unregelmäßig ohne Präfix</button>
+    <input type="hidden" name="verbtype" value="iregwopre">
+</form>
 
-        <form class="form-inline" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-primary" type="button">Unregelmäßig mit Präfix trennbare</button>
-            <input type="hidden" name="verbtype" value="iregwzpretre">
-        </form>
+<form class="form-inline" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button type="submit" class="btn btn-primary" type="button">Unregelmäßig mit Präfix trennbare</button>
+    <input type="hidden" name="verbtype" value="iregwzpretre">
+</form>
 
-        <form class="form-inline" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-primary" type="button">Unregelmäßig mit Präfix trennbare</button>
-            <input type="hidden" name="verbtype" value="iregwzpreni">
-        </form>
+<form class="form-inline" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button type="submit" class="btn btn-primary" type="button">Unregelmäßig mit Präfix trennbare</button>
+    <input type="hidden" name="verbtype" value="iregwzpreni">
+</form>
 
 
-    {% if explanation %}
-        <p>{{ explanation }}</p>
-    {% endif %}
+{% if explanation %}
+    <p>{{ explanation }}</p>
+{% endif %}
 
-　　	<p>
-       <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
-        Hide/Show
-       </button>
-    </p>
+<p>
+   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
+    Hide/Show
+   </button>
+</p>
 
-    {% if verbs %}
-    <div class="collapse" id="collapseTable">
-    <table class="table">
+{% if verbs %}
+<div class="collapse" id="collapseTable">
+<table class="table">
+    <tr>
+        <th scope="col">Infinitiv</th>
+        <th scope="col">Regelmäßig</th>
+        <th scope="col">Trennbar</th>
+        <th scope="col">Präfix</th>
+        <th scope="col">Perfekt</th>
+        <th scope="col">Hilfsverb</th>
+        <th scope="col">Bedeuten</th>
+    </tr>
+{% for verb in verbs %}
         <tr>
-            <th scope="col">Infinitiv</th>
-            <th scope="col">Regelmäßig</th>
-            <th scope="col">Trennbar</th>
-            <th scope="col">Präfix</th>
-            <th scope="col">Perfekt</th>
-            <th scope="col">Hilfsverb</th>
-            <th scope="col">Bedeuten</th>
+            <td>{{ verb[0] }}</td>
+            <td>{{ verb[1] }}</td>
+            <td>{{ verb[2] }}</td>
+            <td>{{ verb[3] }}</td>
+            <td>{{ verb[4] }}</td>
+            {% if verb[5] == None %}
+                <td> - </td>
+            {% else %}
+                <td>{{ verb[5] }}</td>
+            {% endif %}
+            <td>{{ verb[6] }}</td>
         </tr>
-    {% for verb in verbs %}
-            <tr>
-                <td>{{ verb[0] }}</td>
-                <td>{{ verb[1] }}</td>
-                <td>{{ verb[2] }}</td>
-                <td>{{ verb[3] }}</td>
-                <td>{{ verb[4] }}</td>
-                {% if verb[5] == None %}
-                    <td> - </td>
-                {% else %}
-                    <td>{{ verb[5] }}</td>
-                {% endif %}
-                <td>{{ verb[6] }}</td>
-            </tr>
-    {% endfor %}
-     </table>
+{% endfor %}
+ </table>
+</div>
+{% endif %}
+
+{% if question %}
+    <div class="row">
+        <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group">
+                {{ question['subject'] }}&nbsp;
+                <input type="text" class="form-control" name="pastanswer" id="answer" placeholder="Hilfsverb">&nbsp;
+                {{ question['body'] }}&nbsp;
+                <input type="text" class="form-control" name="perfectanswer" id="answer" placeholder="Partizip">&nbsp;
+                "{{ question['verb'] }}"&nbsp;
+                <input type="hidden" name="pastkey" value="{{ question['help'] }}">
+                <input type="hidden" name="perfectverb" value="{{ question['perfect']}}">
+                <input type="hidden" name="verb" value="{{ question['verb']}}">
+                <input type="hidden" name="verbtype" value="none">
+
+                <button type="submit" class="btn btn-primary btn-raised">Check</button>
+            </div>
+        </form>
     </div>
-    {% endif %}
+{% endif %}
 
-    {% if question %}
-        <div class="row">
-            <form class="form-inline" method="post">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                <div class="form-group">
-                    {{ question['subject'] }}&nbsp;
-                    <input type="text" class="form-control" name="pastanswer" id="answer" placeholder="Hilfsverb">&nbsp;
-                    {{ question['body'] }}&nbsp;
-                    <input type="text" class="form-control" name="perfectanswer" id="answer" placeholder="Partizip">&nbsp;
-                    "{{ question['verb'] }}"&nbsp;
-                    <input type="hidden" name="pastkey" value="{{ question['help'] }}">
-                    <input type="hidden" name="perfectverb" value="{{ question['perfect']}}">
-                    <input type="hidden" name="verb" value="{{ question['verb']}}">
-                    <input type="hidden" name="verbtype" value="none">
-
-                    <button type="submit" class="btn btn-primary btn-raised">Check</button>
-                </div>
-            </form>
-        </div>
-    {% endif %}
-
-    {% if result %}
-    <p>{{ result }}</p>
-    {% endif %}
-
-	</div>
-
-	<!-- Bootstrap CDN -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-</body>
-</html>
+{% if result %}
+<p>{{ result }}</p>
+{% endif %}
+{% endblock %}
