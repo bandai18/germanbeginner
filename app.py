@@ -108,11 +108,6 @@ def modalverb():
                                modal_question=display_question)
 
 
-@app.route('/order', methods=["GET", "POST"])
-def order():
-    return render_template('order.html')
-
-
 @app.route('/perfect', methods=["GET"])
 def perfect_get():
     verbs = main.get_all_verbs()
