@@ -103,10 +103,12 @@ def get_duration_answer(subject):
 
 def get_verbs(items):
     cur = db.get_db().cursor()
-    res = cur.execute('select verb, regular, separable, prefixt, pf.perfect, pf.help, meaning from verbs vb ' +
-                      'inner join perfects pf on vb.id = pf.id ' +
-                      'where regular == {0} and separable == {1} and prefixt == {2}'
-                      .format(items[0], items[1], items[2]))
+    res = cur.execute(
+        'select verb, regular, separable, prefixt, pf.perfect, pf.help, meaning from verbs vb ' +
+        'inner join perfects pf on vb.id = pf.id ' +
+        'where regular = ? and separable = ? and prefixt = ?',
+        (items[0], items[1], items[2])
+    )
     db.close_db()
 
     return res
@@ -114,8 +116,10 @@ def get_verbs(items):
 
 def get_allverbs():
     cur = db.get_db().cursor()
-    res = cur.execute('select verb, regular, separable, prefixt, pf.perfect from verbs vb ' +
-                      'inner join perfects pf on vb.id = pf.id ')
+    res = cur.execute(
+        'select verb, regular, separable, prefixt, pf.perfect from verbs vb ' +
+        'inner join perfects pf on vb.id = pf.id '
+    )
     db.close_db()
 
     return res
