@@ -1,10 +1,15 @@
 from flask import Flask, render_template, request, logging, Response, redirect, flash
 from flask_wtf.csrf import CSRFProtect, CSRFError
+from markupsafe import escape
 import main
 import date_function as dt
+import re
+import html
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'change-this-to-a-secure-random-string-in-production'
+csrf = CSRFProtect(app)
 
 
 @app.route('/', methods=["GET"])
@@ -15,7 +20,7 @@ def index():
 
 @app.route('/', methods=["POST"])
 def index_post():
-    enter_time = request.form['time_id']
+    enter_time = sanitize_input(request.form.get('time_id', ''))
     time = main.get_time(enter_time)
     error = ""
     rotates = []
@@ -33,7 +38,7 @@ def practice():
     rotates = main.get_rotate(display_value)
 
     if request.method == "POST":
-        response = request.form['entered_value']
+        response = sanitize_input(request.form.get('entered_value', ''))
         if response != "clear":
             time = main.get_time(response)
             res_rotate = main.get_rotate(response)
@@ -47,14 +52,14 @@ def practice():
 def duration():
     display_value = main.get_duration()
     if request.method == "POST":
-        subject = request.form['subject_id']
+        subject = sanitize_input(request.form.get('subject_id', ''))
         answer = main.get_duration_answer(subject)
 
         if answer is None:
             error = "Input value is not valid. Enter correct value: "
             return render_template('duration.html', display_value=display_value, error=error)
         else:
-            answer_input = request.form['duration_id']
+            answer_input = sanitize_input(request.form.get('duration_id', ''))
             evaluate = main.evaluate_answer(answer, answer_input)
             return render_template('duration.html', display_value=display_value, answer_value=answer_input,
                                    answer=answer, evaluate=evaluate)
@@ -67,11 +72,11 @@ def modalverb():
     display_value = main.get_modalverb()
     pronoun = main.get_pronoun()
 
-    if request.method == "POST" and request.form['clear'] == "none":
-        key = request.form['questionkey']
-        modalverb = request.form['modalverb']
-        entered_answer = request.form['answer']
-        question_body = request.form['questionbody']
+    if request.method == "POST" and request.form.get('clear', '') == "none":
+        key = sanitize_input(request.form.get('questionkey', ''))
+        modalverb = sanitize_input(request.form.get('modalverb', ''))
+        entered_answer = sanitize_input(request.form.get('answer', ''))
+        question_body = sanitize_input(request.form.get('questionbody', ''))
         check_answer = main.evaluate_answer(entered_answer, modalverb)
 
         return render_template('modalverbs.html', display_value=display_value, pronoun=pronoun,
@@ -97,36 +102,37 @@ def perfect_get():
 
 @app.route('/perfect', methods=["POST"])
 def perfect():
+    verbtype = sanitize_input(request.form.get('verbtype', ''))
 
-    if request.form['verbtype'] == "none":
-        past_answer = request.form['pastanswer']
-        perfect_answer = request.form['perfectanswer']
+    if verbtype == "none":
+        past_answer = sanitize_input(request.form.get('pastanswer', ''))
+        perfect_answer = sanitize_input(request.form.get('perfectanswer', ''))
 
-        past_key = request.form['pastkey']
-        perfect_verb = request.form['perfectverb']
-        return_verb = request.form['verb']
+        past_key = sanitize_input(request.form.get('pastkey', ''))
+        perfect_verb = sanitize_input(request.form.get('perfectverb', ''))
+        return_verb = sanitize_input(request.form.get('verb', ''))
         result = main.evaluate_perfect(past_answer, past_key, perfect_answer, perfect_verb)
         question = main.get_verb_same_question(return_verb)
         return render_template('perfect.html', question=question, result=result)
     else:
         items = [1, 1, 1]
 
-        if request.form['verbtype'] == "regwopre":
+        if verbtype == "regwopre":
             items[1] = 0
             items[2] = 0
             explanation = 'ge --- t'
-        elif request.form['verbtype'] == "regwzpreni":
+        elif verbtype == "regwzpreni":
             items[1] = 0
             explanation = '--- t'
-        elif request.form['verbtype'] == "iregwopre":
+        elif verbtype == "iregwopre":
             items[0] = 0
             items[1] = 0
             items[2] = 0
             explanation = 'ge --- en'
-        elif request.form['verbtype'] == "iregwzpretre":
+        elif verbtype == "iregwzpretre":
             items[0] = 0
             explanation = '(pre) ge --- en'
-        elif request.form['verbtype'] == "iregwzpreni":
+        elif verbtype == "iregwzpreni":
             items[0] = 0
             items[1] = 0
             explanation = '--- en'
@@ -154,10 +160,10 @@ def dates():
 @app.route('/date', methods=["POST"])
 def dates_post():
     dates = dt.get_dates()
-    date = request.form['date']
-    month = request.form['month']
-    year = request.form['year']
-    answer = request.form['answer']
+    date = sanitize_input(request.form.get('date', ''))
+    month = sanitize_input(request.form.get('month', ''))
+    year = sanitize_input(request.form.get('year', ''))
+    answer = sanitize_input(request.form.get('answer', ''))
 
     validation = dt.validate_date_answer(date, month, answer)
 
@@ -171,6 +177,22 @@ def pronoun():
     pro_table = main.get_pronoun_table()
 
     return render_template('pronoun.html', pronoun=pronouns, protable=pro_table)
+
+
+def sanitize_input(input_string):
+    """Sanitize user input to prevent XSS attacks."""
+    if input_string is None:
+        return ""
+    # HTML escape the string
+    sanitized = html.escape(input_string)
+    # Only allow alphanumeric characters, spaces, and specific punctuation
+    sanitized = re.sub(r'[^\w\s.,:;?!-]', '', sanitized)
+    return sanitized
+
+
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    return render_template('csrf_error.html', reason=e.description), 400
 
 
 if __name__ == '__main__':

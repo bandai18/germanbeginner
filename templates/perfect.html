@@ -63,32 +63,38 @@
 
         <!-- Regular -->
         <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <button type="submit" class="btn btn-primary" type="button">Regelmäßig ohne Präfix</button>
             <input type="hidden" name="verbtype" value="regwopre">
         </form>
 
         <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <button type="submit" class="btn btn-primary" type="button">Regelmäßig mit Präfix trennbare</button>
             <input type="hidden" name="verbtype" value="regwzpretre">
         </form>
 
         <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <button type="submit" class="btn btn-primary" type="button">Regelmäßig mit Präfix nicht trennbare</button>
             <input type="hidden" name="verbtype" value="regwzpreni">
         </form>
 
         <!-- Irregular -->
         <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <button type="submit" class="btn btn-primary" type="button">Unregelmäßig ohne Präfix</button>
             <input type="hidden" name="verbtype" value="iregwopre">
         </form>
 
         <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <button type="submit" class="btn btn-primary" type="button">Unregelmäßig mit Präfix trennbare</button>
             <input type="hidden" name="verbtype" value="iregwzpretre">
         </form>
 
         <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <button type="submit" class="btn btn-primary" type="button">Unregelmäßig mit Präfix trennbare</button>
             <input type="hidden" name="verbtype" value="iregwzpreni">
         </form>
@@ -123,7 +129,7 @@
                 <td>{{ verb[2] }}</td>
                 <td>{{ verb[3] }}</td>
                 <td>{{ verb[4] }}</td>
-                {% if verb[5] == NULL %}
+                {% if verb[5] == None %}
                     <td> - </td>
                 {% else %}
                     <td>{{ verb[5] }}</td>
@@ -138,6 +144,7 @@
     {% if question %}
         <div class="row">
             <form class="form-inline" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="form-group">
                     {{ question['subject'] }}&nbsp;
                     <input type="text" class="form-control" name="pastanswer" id="answer" placeholder="Hilfsverb">&nbsp;

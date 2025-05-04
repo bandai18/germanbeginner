@@ -90,6 +90,7 @@
         <!-- Question -->
         <div class="mui-container">
         <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="form-group">
                 <input name="subject_id" class="form-control" placeholder="Enter activity" type="text" >&nbsp;<br />
                 <input name="duration_id" class="form-control" style="width:300px" placeholder="Enter a whole answer" type="text" >&nbsp;

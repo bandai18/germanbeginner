@@ -93,6 +93,7 @@
         <!-- question -->
         {% if modal_question %}
         <form class="form-inline" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="form-group">
                 {{ modal_question['subject'] }}&nbsp;
                 <input type="text" class="form-control" name="answer" id="answer" >&nbsp;
@@ -121,6 +122,7 @@
                 </span>
 
                 <form class="form-inline" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                     <button type="submit" class="btn btn-primary btn-raised">Clear</button>
                     <input type="hidden" name="clear" value="clear">
                 </form>
