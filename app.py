@@ -1,15 +1,35 @@
-from flask import Flask, render_template, request, logging, Response, redirect, flash
+from flask import Flask, render_template, request, Response, redirect, flash
 from flask_wtf.csrf import CSRFProtect, CSRFError
 from markupsafe import escape
+import logging
 import main
 import date_function as dt
+import db
 import re
 import html
+import os
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'change-this-to-a-secure-random-string-in-production'
+
+# Configure application
+app.config.update(
+    SECRET_KEY=os.environ.get('SECRET_KEY', 'dev-key-change-in-production'),
+    DATABASE=os.path.join(app.instance_path, 'german.db'),
+    DEBUG=os.environ.get('FLASK_DEBUG', 'False').lower() in ('true', 't', '1')
+)
+
+# Setup logging
+logging.basicConfig(
+    level=logging.DEBUG if app.config['DEBUG'] else logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+
+# Initialize CSRF protection
 csrf = CSRFProtect(app)
+
+# Initialize database
+db.init_app(app)
 
 
 @app.route('/', methods=["GET"])

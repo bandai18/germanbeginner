@@ -9,7 +9,8 @@ import personal_pronoun as pp
 from datetime import time
 import random
 import re
-import db as db
+import logging
+import db
 
 
 def get_time(time):
@@ -102,27 +103,75 @@ def get_duration_answer(subject):
 
 
 def get_verbs(items):
-    cur = db.get_db().cursor()
-    res = cur.execute(
-        'select verb, regular, separable, prefixt, pf.perfect, pf.help, meaning from verbs vb ' +
-        'inner join perfects pf on vb.id = pf.id ' +
-        'where regular = ? and separable = ? and prefixt = ?',
-        (items[0], items[1], items[2])
-    )
-    db.close_db()
-
-    return res
+    """Fetch verbs matching the specified criteria.
+    
+    Args:
+        items: A list containing regular, separable, and prefix flags.
+        
+    Returns:
+        A list of tuples containing verb information.
+        
+    Raises:
+        sqlite3.Error: If there is a database error.
+    """
+    try:
+        conn = db.get_db()
+        cursor = conn.cursor()
+        
+        query = '''
+            SELECT verb, regular, separable, prefixt, pf.perfect, pf.help, meaning 
+            FROM verbs vb 
+            INNER JOIN perfects pf ON vb.id = pf.id 
+            WHERE regular = ? AND separable = ? AND prefixt = ?
+        '''
+        
+        # Execute query
+        cursor.execute(query, (items[0], items[1], items[2]))
+        
+        # Fetch all results
+        results = cursor.fetchall()
+        
+        # No need to close the database connection manually, 
+        # the teardown function will handle it
+        
+        return results
+    except Exception as e:
+        logging.error(f"Error fetching verbs: {e}")
+        raise
 
 
 def get_all_verbs():
-    cur = db.get_db().cursor()
-    res = cur.execute(
-        'select verb, regular, separable, prefixt, pf.perfect from verbs vb ' +
-        'inner join perfects pf on vb.id = pf.id '
-    )
-    db.close_db()
-
-    return res
+    """Fetch all verbs from the database.
+    
+    Returns:
+        A list of tuples containing all verbs.
+        
+    Raises:
+        sqlite3.Error: If there is a database error.
+    """
+    try:
+        conn = db.get_db()
+        cursor = conn.cursor()
+        
+        query = '''
+            SELECT verb, regular, separable, prefixt, pf.perfect 
+            FROM verbs vb 
+            INNER JOIN perfects pf ON vb.id = pf.id
+        '''
+        
+        # Execute query
+        cursor.execute(query)
+        
+        # Fetch all results
+        results = cursor.fetchall()
+        
+        # No need to close the database connection manually, 
+        # the teardown function will handle it
+        
+        return results
+    except Exception as e:
+        logging.error(f"Error fetching all verbs: {e}")
+        raise
 
 
 def get_verb_question(verbs):
