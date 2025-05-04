@@ -96,7 +96,7 @@ def get_duration_answer(subject):
             return None
         answer.append(dd.stunden_dictionary.get('plural'))
 
-        return tc.getStringName(answer)
+        return tc.get_string_name(answer)
     else:
         return None
 

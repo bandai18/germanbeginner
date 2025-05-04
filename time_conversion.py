@@ -8,7 +8,7 @@ def get_half_time(hour, minute):
 	timePhrase.append(tg.getUnofficialPhrase(30))
 	timePhrase.append(tg.get12Hour(hour+1))
 
-	return getStringName(timePhrase)
+	return get_string_name(timePhrase)
 
 
 def get_quater_time(hour, minute):
@@ -24,7 +24,7 @@ def get_quater_time(hour, minute):
 
 	timePhrase.append(tg.get12Hour(hour + hourIndex))
 
-	return getStringName(timePhrase)
+	return get_string_name(timePhrase)
 
 
 def get_twenty_minutes(hour, minute):
@@ -49,7 +49,7 @@ def get_twenty(hour, minute):
 	
 	timePhrase.append(tg.get12Hour(hour+hourIndex))
 	
-	return getStringName(timePhrase)
+	return get_string_name(timePhrase)
 	
 	
 def get_to_half_time(hour, minute):
@@ -65,7 +65,7 @@ def get_to_half_time(hour, minute):
 	halfTimePhrase.append(tg.getUnofficialPhrase(30))
 	halfTimePhrase.append(tg.get12Hour(hour+1))
 	
-	return getStringName(halfTimePhrase)
+	return get_string_name(halfTimePhrase)
 
 
 def get_five_minutes(hour, minute):
@@ -87,7 +87,7 @@ def get_five_minutes(hour, minute):
 
 	timePhrase.append(tg.get12Hour(hour+hourIndex))
 	
-	return getStringName(timePhrase)
+	return get_string_name(timePhrase)
 
 	
 def get_ten_minutes(hour, minute):
@@ -103,7 +103,7 @@ def get_ten_minutes(hour, minute):
 		
 	timePhrase.append(tg.get12Hour(hour+hourIndex))
 
-	return getStringName(timePhrase)
+	return get_string_name(timePhrase)
 
 
 def get_exact_time_phrase(hour, minute):
@@ -112,7 +112,7 @@ def get_exact_time_phrase(hour, minute):
 	fullTimePhrase.append(tg.getUnofficialPhrase(minute))
 	fullTimePhrase.append(tg.get12Hour(hour))
 
-	return getStringName(fullTimePhrase)
+	return get_string_name(fullTimePhrase)
 
 
 def get_phrase(hour, min):
@@ -143,7 +143,7 @@ def get_german_time_phrase(hour, minute):
 	return timePhrase
 
 
-def getStringName(list):
+def get_string_name(list):
 	my_str = ' '.join(map(str, list))
 
 	return my_str

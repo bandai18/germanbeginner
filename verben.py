@@ -71,11 +71,11 @@ modal_questions = {
         'body': 'im Hotel',
         'verb': 'frühstücken',
         'perfect': 'gefrühstückt'},
-    'whonen': {
+    'wohnen': {
         'subject': 'Anton',
         'help': 'hat',
         'body': 'in Frankfurt',
-        'verb': 'whonen',
+        'verb': 'wohnen',
         'perfect': 'gewhont'},
     'löschen':{
         'subject': 'Ich',
@@ -116,7 +116,7 @@ modal_questions = {
     'bestellen': {
         'subject': 'Peter',
         'help': 'hat',
-        'body': 'shone ein Bier',
+        'body': 'schon ein Bier',
         'verb': 'bestellen',
         'perfect': 'bestellt'},
     'übersetzen': {
@@ -164,7 +164,7 @@ modal_questions = {
     'schreiben': {
         'subject': 'Ich',
         'help': 'habe',
-        'body': 'heute shone 30 E-Mails',
+        'body': 'heute schon 30 E-Mails',
         'verb': 'schreiben',
         'perfect': 'geschrieben'},
     'gehen': {

@@ -1,4 +1,4 @@
-def getNumber(minute):
+def get_number(minute):
 	hour_dictionary = {
 		1: "ein",
 		2: "zwei",
@@ -13,7 +13,7 @@ def getNumber(minute):
 		11: "elf",
 		12: "zwölf",
 		13: "dreizehn",
-		14: "fierzehn",
+		14: "vierzehn",
 		15: "fünfzehn",
 		16: "sechzehn",
 		17: "siebzehn",
@@ -25,7 +25,7 @@ def getNumber(minute):
 		23: "draiundzwanzig",
 		24: "vierundzwanzig", 
 		25: "fünfundzwanzig",
-		26: "sichundzwanzig",
+		26: "sechsundzwanzig",
 		27: "seibundzwanzig",
 		28: "achundzwanzig",
 		29: "neunundzwanzig",
