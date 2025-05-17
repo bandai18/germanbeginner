@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+  {% block title %}German Articles{% endblock %}
+
+  {% block page_heading %}German Articles (der, die, das){% endblock %}
+
+  {% block content %}
+    <h2>Practice German Articles</h2>
+
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+      <label for="noun">Select a noun:</label>
+      <select name="noun" id="noun">
+        {% for noun, gender in nouns.items() %}
+          <option value="{{ noun }}">{{ noun }} ({{ gender }})</option>
+        {% endfor %}
+      </select>
+
+      <label for="article_type">Case:</label>
+      <select name="article_type" id="article_type">
+        <option value="nominative">Nominative</option>
+        <option value="accusative">Accusative</option>
+        <option value="dative">Dative</option>
+        <option value="genitive">Genitive</option>
+      </select>
+
+      <input type="text" name="answer" placeholder="Enter the article">
+      <button type="submit">Check</button>
+    </form>
+
+    {% if is_correct is defined %}
+      <div class="result">
+        Your answer is {{ "correct" if is_correct else "incorrect" }}.
+      </div>
+    {% endif %}
+  {% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Introduction{% endblock %}
+
+{% block page_heading %}Introduction{% endblock %}
+
+{% block content %}
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .answer-cell {
+            color: transparent;
+            transition: color 0.3s ease;
+        }
+        .answer-cell.revealed {
+            color: black;
+        }
+        button {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Frage</th>
+            <th>Antwort</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for key, value in questions.items() %}
+        <tr>
+          <td data-field="{{ key }}">{{ value }}</td>
+          <td class="answer-cell" data-field="{{ key }}">{{ answers[key] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button id="revealButton">Antworten anzeigen</button>
+    <script>
+        // Add reveal button functionality
+        const revealButton = document.getElementById('revealButton');
+        const answerCells = document.querySelectorAll('.answer-cell');
+
+        revealButton.addEventListener('click', () => {
+            answerCells.forEach(cell => {
+                cell.classList.add('revealed');
+            });
+            revealButton.textContent = 'Antworten angezeigt';
+            revealButton.disabled = true;
+        });
+    </script>
+
+  {% endblock %}

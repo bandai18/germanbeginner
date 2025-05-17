@@ -1,4 +1,6 @@
 from __future__ import division
+
+import introduction
 import time_conversion as tc
 import official_time as ot
 import duration_data as dd
@@ -220,3 +222,22 @@ def get_pronoun_table():
         table.append(row)
 
     return table
+
+import articles as art
+
+def get_articles():
+      return art.articles_dict
+
+def get_nouns():
+      return art.nouns
+
+def check_article_answer(noun, article_type, answer):
+      expected = art.articles_dict[art.nouns[noun]][article_type]
+      return answer.lower() == expected.lower()
+
+
+def get_questions():
+    return introduction.questions
+
+def get_answers():
+    return introduction.answers

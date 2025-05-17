@@ -194,6 +194,36 @@ def pronoun():
     return render_template('pronoun.html', pronoun=pronouns, protable=pro_table)
 
 
+@app.route('/articles', methods=["GET", "POST"])
+def articles():
+      nouns = main.get_nouns()
+      articles = main.get_articles()
+
+      if request.method == "POST":
+          noun = sanitize_input(request.form.get('noun', ''))
+          article_type = sanitize_input(request.form.get('article_type', ''))
+          answer = sanitize_input(request.form.get('answer', ''))
+
+          is_correct = main.check_article_answer(noun, article_type, answer)
+
+          return render_template('articles.html',
+                                 nouns=nouns,
+                                 articles=articles,
+                                 is_correct=is_correct,
+                                 selected_noun=noun)
+
+      return render_template('articles.html',
+                             nouns=nouns,
+                             articles=articles)
+
+
+@app.route('/introduction', methods=["GET"])
+def introduction():
+    questions = main.get_questions()
+    answers = main.get_answers()
+    return render_template('introduction.html', questions=questions, answers=answers)
+
+
 def sanitize_input(input_string):
     """Sanitize user input to prevent XSS attacks."""
     if input_string is None:
